@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useProducts } from '~/composables/useProducts'
 
-const { products } = useProducts()
+const { products, isLoading } = useProducts()
 const search = ref('')
 
 const filteredProducts = computed(() => {
@@ -31,8 +31,16 @@ const filteredProducts = computed(() => {
               autofocus
               class="mb-4"
             />
+            <v-progress-circular
+              v-if="isLoading"
+              indeterminate
+              color="primary"
+              size="60"
+              width="7"
+              class="ma-8 d-flex mx-auto"
+            />
             <ListProducts
-              v-if="filteredProducts.length > 0"
+              v-else-if="filteredProducts.length > 0"
               :products="filteredProducts"
             />
             <UiEmptyState

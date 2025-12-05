@@ -3,6 +3,7 @@ import type { Product } from '../types/product'
 
 export const useProducts = () => {
   const products = ref<Product[]>([])
+  const isLoading = ref(true)
 
   const loadProducts = async () => {
     const response = await fetch('/products.csv')
@@ -14,11 +15,13 @@ export const useProducts = () => {
     })
 
     products.value = parsed.data
+    isLoading.value = false
   }
 
   onMounted(loadProducts)
 
   return {
-    products
+    products,
+    isLoading
   }
 }
