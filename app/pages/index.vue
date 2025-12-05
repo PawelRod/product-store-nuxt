@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useProducts } from '../composables/useProducts'
+import { useProducts } from '~/composables/useProducts'
 
 const { products } = useProducts()
 const search = ref('')
@@ -27,10 +27,24 @@ const filteredProducts = computed(() => {
               variant="outlined"
               prepend-inner-icon="mdi-magnify"
               clearable
+              @click:clear="search = ''"
               autofocus
               class="mb-4"
             />
-            <ListProducts :products="filteredProducts" />
+            <ListProducts
+              v-if="filteredProducts.length > 0"
+              :products="filteredProducts"
+            />
+            <UiEmptyState
+              v-else
+            >
+              <v-btn
+                variant="tonal"
+                color="primary"
+                @click="search = ''">
+                Clear search
+              </v-btn>
+            </UiEmptyState>
           </v-col>
         </v-row>
       </v-container>
