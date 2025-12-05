@@ -3,15 +3,22 @@ import { useProducts } from '../composables/useProducts'
 
 const { products } = useProducts()
 const search = ref('')
+
+const filteredProducts = computed(() => {
+  return products.value.filter(p => 
+    p.name.toLowerCase().includes(search.value.toLowerCase()) ||
+    p.description.toLowerCase().includes(search.value.toLowerCase()) ||
+    p.manufacturer.toLowerCase().includes(search.value.toLowerCase())
+  )
+})
 </script>
 
 <template>
   <v-app>
     <v-main>
-      <v-container>
+      <v-container class="px-4 px-md-8">
         <v-row>
           <v-col cols="12" md="3">
-            <!-- Filters... -->
           </v-col>
           <v-col cols="12" md="9">
             <v-text-field
@@ -23,7 +30,7 @@ const search = ref('')
               autofocus
               class="mb-4"
             />
-            <!-- Products... -->
+            <ListProducts :products="filteredProducts" />
           </v-col>
         </v-row>
       </v-container>
