@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useProducts } from '../composables/useProducts'
+
+const { products } = useProducts()
 const search = ref('')
 </script>
 
