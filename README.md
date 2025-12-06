@@ -5,6 +5,16 @@ Users can browse products, search by text, and filter by category, manufacturer,
 
 ---
 
+## 🔗 Links
+
+**Live app:**
+https://product-store-nuxt.vercel.app/
+
+**Repository:**
+https://github.com/PawelRod/product-store-nuxt
+
+---
+
 ## 🚀 Features
 
 - Full-text search (name, manufacturer, description)
