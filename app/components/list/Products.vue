@@ -7,7 +7,10 @@ defineProps<{
 </script>
 
 <template>
-  <v-row align="stretch">
+  <v-row
+    align="stretch"
+    class="px-1 mt-2"
+  >
     <v-col
       v-for="product in products"
       :key="product.name"
