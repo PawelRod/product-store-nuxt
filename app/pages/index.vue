@@ -110,6 +110,8 @@ watch(
             />
             <UiEmptyState
               v-else
+              title="No products found"
+              message="Try adjusting your search pharse"
             >
               <v-btn
                 variant="tonal"

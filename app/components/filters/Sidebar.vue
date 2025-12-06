@@ -1,13 +1,7 @@
 <script setup lang="ts">
-defineProps<{
-  categories: string[]
-  manufacturers: string[]
-  selectedCategory: string | null
-  selectedManufacturer: string | null
-  priceRange: [number, number]
-  minPrice: number
-  maxPrice: number
-}>()
+import type { Filters } from '~/types/filters'
+
+defineProps<Filters>()
 
 const emit = defineEmits([
   'update:selectedCategory',
