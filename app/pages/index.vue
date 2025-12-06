@@ -55,6 +55,20 @@ const {
               <p class="text-body-2 text-grey mr-auto">
                 Showing {{ filteredProducts.length }} of {{ products.length }} products
               </p>
+              <v-btn
+                variant="tonal"
+                color="primary"
+                class="mr-4"
+                @click="
+                  search = '';
+                  selectedCategory = null;
+                  selectedManufacturer = null;
+                  priceRange = [minPrice, maxPrice];
+                  sortBy = null;
+                "
+              >
+                Clear filters
+              </v-btn>
               <v-select
                 :items="[
                   { title: 'Cheapest first', value: 'asc' },
@@ -85,14 +99,7 @@ const {
               v-else
               title="No products found"
               message="Try adjusting your search pharse"
-            >
-              <v-btn
-                variant="tonal"
-                color="primary"
-                @click="search = ''">
-                Clear search
-              </v-btn>
-            </UiEmptyState>
+            />
           </v-col>
         </v-row>
       </v-container>

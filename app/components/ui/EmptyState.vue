@@ -18,6 +18,5 @@ defineProps<EmptyStateProps>()
     <p class="text-body-2 mb-6">
       {{ message }}
     </p>
-    <slot />
   </div>
 </template>
