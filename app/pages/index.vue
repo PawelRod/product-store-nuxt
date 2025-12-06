@@ -7,6 +7,7 @@ const search = ref('')
 const selectedCategory = ref<string | null>(null)
 const selectedManufacturer = ref<string | null>(null)
 const priceRange = ref<[number, number]>([0, 0])
+const sortBy = ref<'asc' | 'desc' | null>(null)
 
 const minPrice = computed(() =>
   products.value.length > 0 ? Math.min(...products.value.map(p => p.price)) : 0
@@ -38,6 +39,14 @@ const filteredProducts = computed(() => {
 
   if (selectedManufacturer.value) {
     result = result.filter(p => p.manufacturer === selectedManufacturer.value)
+  }
+
+  if (sortBy.value === 'asc') {
+    result = [...result].sort((a, b) => a.price - b.price)
+  }
+
+  if (sortBy.value === 'desc') {
+    result = [...result].sort((a, b) => b.price - a.price)
   }
 
   result = result.filter(p => 
@@ -93,9 +102,24 @@ watch(
               autofocus
               class="mb-4"
             />
-            <p class="text-body-2 text-grey mb-4">
-              Showing {{ filteredProducts.length }} of {{ products.length }} products
-            </p>
+            <div class="d-flex justify-end align-center mb-4">
+              <p class="text-body-2 text-grey mr-auto">
+                Showing {{ filteredProducts.length }} of {{ products.length }} products
+              </p>
+              <v-select
+                :items="[
+                  { title: 'Cheapest first', value: 'asc' },
+                  { title: 'Most expensive first', value: 'desc' }
+                ]"
+                v-model="sortBy"
+                variant="outlined"
+                density="compact"
+                hide-details
+                style="max-width: 220px"
+                label="Sort by"
+                clearable
+              />
+            </div>
             <v-progress-circular
               v-if="isLoading"
               indeterminate
